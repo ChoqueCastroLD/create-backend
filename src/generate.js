@@ -45,7 +45,18 @@ module.exports = {
         }
         
 
-        console.log("done ;)\n\ncd "+getOutput(''));
+        console.log(`done ;)
+
+        What's next?
+        1. Go to your project folder
+        cd ${getOutput('')}
+
+        2. Install dependencies (node_modules)
+        npm install
+
+        3. Try it!
+        npm start
+        `);
         
     }
 }
