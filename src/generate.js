@@ -5,7 +5,7 @@ const ejs = require('ejs');
 module.exports = {
     async generate(options = {}){
         // options > name & database & sockets & rest        
-        let getOutput = (somePath = '') => path.resolve(__dirname, `./${options.name}/${somePath}`);
+        let getOutput = (somePath = '') => `./${options.name}/${somePath}`;
         let getTemplate = (somePath = '') => path.resolve(__dirname, `./template/${somePath}`);
 
 
@@ -45,7 +45,7 @@ module.exports = {
         }
         
 
-        console.log("done ;)");
+        console.log("done ;)\n\ncd "+getOutput(''));
         
     }
 }
