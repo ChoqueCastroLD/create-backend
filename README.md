@@ -7,3 +7,6 @@ Use with npx anywhere (installation free)
 > npx create-backend
 
 Then you just answer less than 5 prompts and boom! you got a backend.
+
+Screenshot:
+![Alt text](/screenshot.jpg?raw=true "screen")
