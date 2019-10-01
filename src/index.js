@@ -78,7 +78,7 @@ async function main() {
     2. Install and Update node_modules
     npm run setup
     
-    2. Try it!
+    3. Try it!
     npm start
     `);
 }
