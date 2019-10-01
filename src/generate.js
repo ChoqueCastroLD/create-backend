@@ -55,7 +55,7 @@ module.exports = {
             renderFile(`src/routes/userRoutes.${lang}`, options);
         }
 
-        return path.resolve(__dirname, getOutput(''));
+        return path.join(__dirname, getOutput(''));
 
     }
 }
