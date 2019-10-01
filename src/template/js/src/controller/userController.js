@@ -1,4 +1,4 @@
-const usersModel = require('../model/usersModel.js');
+const userModel = require('../model/userModel.js');
 const httpStatus = require('http-status');
 
 module.exports = {
@@ -7,7 +7,7 @@ module.exports = {
             let {id} = req.params;
 
             if(id){
-                let data = await usersModel.getUserById(id);
+                let data = await userModel.getUserById(id);
     
                 let msg = (data) ? 'User found' : 'User not found';
     
@@ -25,7 +25,7 @@ module.exports = {
     },
     async getUsers(req, res){
         try {
-            let data = await usersModel.getUsers();
+            let data = await userModel.getUsers();
 
             let msg = (data.length > 0) ? 'Users found' : 'There are no users';
 
@@ -41,7 +41,7 @@ module.exports = {
             let { name, email } = req.body;
             
             if(name && email){
-                let data = await usersModel.addUser(name, email);
+                let data = await userModel.addUser(name, email);
 
                 res.json({msg: 'User added, returning added user id', data: data.insertId});
             } else {
@@ -60,7 +60,7 @@ module.exports = {
             let { id, name, email } = req.body;
             
             if(id && name && email){
-                let data = await usersModel.updateUser(id, name, email);
+                let data = await userModel.updateUser(id, name, email);
 
                 res.json({msg: 'User updated successfully', data});
             } else {
@@ -79,7 +79,7 @@ module.exports = {
             let { id } = req.body;
 
             if(id){
-                let data = await usersModel.deleteUser(id);
+                let data = await userModel.deleteUser(id);
 
                 res.json({msg: 'User deleted', data});
             } else{

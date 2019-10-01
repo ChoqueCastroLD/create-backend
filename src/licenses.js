@@ -1,4 +1,5 @@
 module.exports = [
+    "UNLICENSED",
     "afl-3.0",
     "apache-2.0",
     "artistic-2.0",

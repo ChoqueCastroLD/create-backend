@@ -4,6 +4,7 @@
     "description": "<%= name %> is the ultimate backend solution",
     "main": "src/server.js",
     "scripts": {
+        "setup": "npm install && npm update",
         "tsc": "tsc",
         "build": "npm run tsc",
         "start": "ts-node-dev --transpileOnly ./src/server.ts",

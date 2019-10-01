@@ -48,12 +48,13 @@ async function main() {
         {
             type: 'list',
             name: 'license',
+            default: 'UNLICENSED',
             message: 'Which license would you like to use?',
             choices: licenses
         }, {
             type: 'input',
             name: 'port',
-            message: "What port will you use ?",
+            message: "Which port will you use ?",
             default: '3000',
             validate: function (value) {
                 let validarCaracteres = value.match(/[0-9]/);
@@ -66,8 +67,20 @@ async function main() {
         },
     ]);
 
-    await gen.generate(answer);
+    let projectPath = await gen.generate(answer);
 
+    console.log(`done ;)
+
+    What's next?
+    1. Go to your project folder
+    cd ${projectPath}
+
+    2. Install and Update node_modules
+    npm run setup
+    
+    2. Try it!
+    npm start
+    `);
 }
 
 main();

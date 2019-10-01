@@ -4,6 +4,7 @@
     "description": "<%= name %> is the ultimate backend solution",
     "main": "src/server.js",
     "scripts": {
+        "setup": "npm install && npm update",
         "start": "node src/server.js"
     },
     "keywords": [

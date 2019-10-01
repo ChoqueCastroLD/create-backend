@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const ejs = require('ejs');
 
+
 module.exports = {
     async generate(options = {}) {
         // options > name & database & sockets & rest        
@@ -54,16 +55,7 @@ module.exports = {
             renderFile(`src/routes/userRoutes.${lang}`, options);
         }
 
-
-        console.log(`done ;)
-
-        What's next?
-        1. Go to your project folder
-        cd ${getOutput('')}
-
-        2. Try it!
-        npm start
-        `);
+        return path.resolve(__dirname, getOutput(''));
 
     }
 }
