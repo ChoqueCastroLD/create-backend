@@ -1,6 +1,9 @@
 #!/usr/bin/env node
+
 const inquirer = require('inquirer');
 const gen = require('./generate.js');
+
+let licenses = require('./licenses.js');
 
 async function main() {
     console.log("What a beatiful day to write some beautiful code!\nLet's begin\n\n-github.com/ChoqueCastroLD");
@@ -23,11 +26,7 @@ async function main() {
             name: 'rest',
             default: 'Yes',
             message: 'Should we include a rest api example?'
-        },/* {
-            type: 'confirm',
-            name: 'sockets',
-            message: 'Should we include a socket.io example?'
-        },*/
+        },
         {
             type: 'list',
             name: 'database',
@@ -36,7 +35,22 @@ async function main() {
             filter: function (val) {
                 return val.toLowerCase();
             }
-        },{
+        },
+        {
+            type: 'list',
+            name: 'lang',
+            message: 'Which programming language would you like to use?',
+            choices: ['Javascript', 'Typescript'],
+            filter: function (val) {
+                return val.toLowerCase();
+            }
+        },
+        {
+            type: 'list',
+            name: 'license',
+            message: 'Which license would you like to use?',
+            choices: licenses
+        }, {
             type: 'input',
             name: 'port',
             message: "What port will you use ?",
