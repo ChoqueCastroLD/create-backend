@@ -18,7 +18,7 @@ const db = new Sequelize(config.database.database, config.database.user, config.
             dateFirst: 1,
         }
     },
-    <% if(database == 'sqlite') { %>
+    <% } if(database == 'sqlite') { %>
     storage: config.database.storage,
     <% } %>
     define: {

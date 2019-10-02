@@ -29,7 +29,7 @@ async function main() {
         answer.name = name.default;
         answer.rest = example.default;
         answer.database = database.default;
-        answer.typescript = typescript.default;
+        answer.ts = typescript.default;
         answer.license = license.default;
         answer.port = port.default;
     }
@@ -61,6 +61,10 @@ async function main() {
         ...inputs
     };
 
+    console.log(args);
+    
+    console.log(options);
+    
     let projectPath = await gen.generate(options);
 
     console.log(`done ;)
