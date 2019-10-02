@@ -37,7 +37,7 @@
         <% } if(database == 'sqlite') { %>
         "sqlite3": "^2.17.1",
         <% } if(database == 'mssql') { %>
-        "tedious": "^6.4.0"
+        "tedious": "^6.4.0",
         <% } %>
         "sequelize": "^5.19.2"
     }
