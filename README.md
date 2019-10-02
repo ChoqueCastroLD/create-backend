@@ -44,6 +44,13 @@ using javascript and mariadb
 > $ npx create-backend naza_backend -y --db=mariadb
 
 
+## TODO
+1. Testing (Jest, Mocha)
+2. M0r3 databases
+3. Microservices
+4. Generate backend based on .sql script
+
+---
 Screenshot:
 
 ![Alt text](/ss.png?raw=true "screen")
