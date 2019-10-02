@@ -14,7 +14,6 @@
     "url": "git+https://github.com/ChoqueCastroLD/create-backend.git"
   },
   "keywords": ["create-backend", "cli", "generator", "scaffolding"],
-  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
   "author": "ChoqueCastroLD",
   "license": "ISC",
   "bugs": {
