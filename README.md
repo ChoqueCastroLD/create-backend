@@ -23,8 +23,8 @@ Argument | Values | Default | Description
 --- | --- | --- | ---
 **-y** | *none* | *none* | Skip all prompts
 **--name** | :String | 'generated_backend' | Project Name
-**--db** | `mysql | mariadb | sqlite | mssql | postgres` | Database engine to be used
-**--example** | `true | false` | false | Adds an example endpoint
+**--db** | mysql or mariadb or sqlite or mssql or postgres | Database engine to be used
+**--example** | *none* | *none* | Adds an example endpoint
 **-ts** | *none* | *none* | Use Typescript instead on Vanilla Javascript
 **--license** | see licenses.js | 'UNLICENSED' | Which license will be used
 **--port** | :Number | 3000 | Which license will be used
