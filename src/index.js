@@ -60,10 +60,6 @@ async function main() {
         ...answer,
         ...inputs
     };
-
-    console.log(args);
-    
-    console.log(options);
     
     let projectPath = await gen.generate(options);
 
