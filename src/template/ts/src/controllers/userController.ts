@@ -1,6 +1,6 @@
 import httpStatus from "http-status";
 
-import usersModel from "../model/userModel";
+import usersModel from "../models/User";
 
 export default {
     async getUserById(req, res){
@@ -8,10 +8,10 @@ export default {
             let {id} = req.params;
 
             if(id){
-                let data = await usersModel.getUserById(id);
+                let data = await userModel.findOne({where: {id}});
     
                 let msg = (data) ? 'User found' : 'User not found';
-    
+                
                 res.json({msg, data});
             } else {
                 res
@@ -26,7 +26,7 @@ export default {
     },
     async getUsers(req, res){
         try {
-            let data = await usersModel.getUsers();
+            let data = await userModel.findAll();
 
             let msg = (data.length > 0) ? 'Users found' : 'There are no users';
 
@@ -42,9 +42,9 @@ export default {
             let { name, email } = req.body;
             
             if(name && email){
-                let data = await usersModel.addUser(name, email);
+                let data = await userModel.create({name, email});
 
-                res.json({msg: 'User added, returning added user id', data: data.insertId});
+                res.json({msg: 'User added, returning added user id', id: data});
             } else {
                 res
                 .status(httpStatus.BAD_REQUEST)
@@ -61,7 +61,7 @@ export default {
             let { id, name, email } = req.body;
             
             if(id && name && email){
-                let data = await usersModel.updateUser(id, name, email);
+                let data = await userModel.updateUser({name, email}, {where:{id}});
 
                 res.json({msg: 'User updated successfully', data});
             } else {
@@ -77,10 +77,10 @@ export default {
     },
     async deleteUser(req, res){
         try {
-            let { id } = req.body;
+            let { id } = req.params;
 
             if(id){
-                let data = await usersModel.deleteUser(id);
+                let data = await userModel.destroy({where: {id}});
 
                 res.json({msg: 'User deleted', data});
             } else{

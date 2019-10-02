@@ -25,8 +25,8 @@ module.exports = {
         // Generate folder structure
         fs.mkdirSync(getOutput(`/src`), opt);
         fs.mkdirSync(getOutput(`/src/config`), opt);
-        fs.mkdirSync(getOutput(`/src/controller`), opt);
-        fs.mkdirSync(getOutput(`/src/model`), opt);
+        fs.mkdirSync(getOutput(`/src/controllers`), opt);
+        fs.mkdirSync(getOutput(`/src/models`), opt);
         fs.mkdirSync(getOutput(`/src/routes`), opt);
 
         // Generate package.json
@@ -44,14 +44,14 @@ module.exports = {
         renderFile(`src/config/config.${lang}`, options);
 
         // Generate database model
-        renderFile(`src/model/database.${lang}`, options);
+        renderFile(`src/models/database.${lang}`, options);
 
         // Generate router
         renderFile(`src/routes/router.${lang}`, options);
 
         if (options.rest) {
-            renderFile(`src/model/userModel.${lang}`, options);
-            renderFile(`src/controller/userController.${lang}`, options);
+            renderFile(`src/models/User.${lang}`, options);
+            renderFile(`src/controllers/userController.${lang}`, options);
             renderFile(`src/routes/userRoutes.${lang}`, options);
         }
 

@@ -19,7 +19,7 @@ module.exports = {
     example: {
         type: 'confirm',
         name: 'rest',
-        default: true,
+        default: false,
         message: 'Should we include a User endpoint example?'
     },
 
@@ -28,7 +28,7 @@ module.exports = {
         name: 'database',
         default: 'mysql',
         message: 'Which database engine would you like to use?',
-        choices: ['MySQL', 'MariaDB (Sequelize)'],
+        choices: ['MySQL', 'MariaDB', 'Postgres', 'MSSQL', 'sqlite'],
         filter: function (val) {
             return val.toLowerCase();
         }

@@ -1,6 +1,6 @@
-const Sequelize = require('sequelize');
+import Sequelize from "sequelize";
 
-const config = require('../config/config.js');
+import config from "../config/config";
 
 const db = new Sequelize(config.database.database, config.database.user, config.database.password, {
     host: config.database.host,
@@ -26,4 +26,4 @@ const db = new Sequelize(config.database.database, config.database.user, config.
     }
 });
 
-module.exports = db;
+export default db;
