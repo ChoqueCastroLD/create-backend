@@ -13,7 +13,12 @@
     "type": "git",
     "url": "git+https://github.com/ChoqueCastroLD/create-backend.git"
   },
-  "keywords": ["create-backend", "cli", "generator", "scaffolding"],
+  "keywords": [
+    "create-backend",
+    "cli",
+    "generator",
+    "scaffolding"
+  ],
   "author": "ChoqueCastroLD",
   "license": "ISC",
   "bugs": {
@@ -22,6 +27,7 @@
   "homepage": "https://github.com/ChoqueCastroLD/create-backend#readme",
   "dependencies": {
     "ejs": "^2.7.1",
-    "inquirer": "^7.0.0"
+    "inquirer": "^7.0.0",
+    "minimist": "^1.2.0"
   }
 }

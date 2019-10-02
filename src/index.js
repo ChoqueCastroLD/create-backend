@@ -1,73 +1,69 @@
 #!/usr/bin/env node
 
+const args = require('minimist')(process.argv.slice(2));
 const inquirer = require('inquirer');
 const gen = require('./generate.js');
 
-let licenses = require('./licenses.js');
+const prompts = require('./prompts.js');
 
 async function main() {
     console.log("What a beatiful day to write some beautiful code!\nLet's begin\n\n-github.com/ChoqueCastroLD");
 
-    let answer = await inquirer.prompt([{
-            type: 'input',
-            name: 'name',
-            default: 'generated_backend',
-            message: "What's your project name ? (This will be the project folder)",
-            validate: function (value) {
-                let validarCaracteres = value.match(/^[_A-z0-9@]*((-|_)*[_A-z0-9@])*$/);
+    console.log(args);
 
-                if (validarCaracteres)
-                    return true;
+    let {
+        name,
+        example,
+        database,
+        typescript,
+        license,
+        port
+    } = prompts;
 
-                return 'Please enter a valid project name';
-            }
-        }, {
-            type: 'confirm',
-            name: 'rest',
-            default: 'Yes',
-            message: 'Should we include a rest api example?'
-        },
-        {
-            type: 'list',
-            name: 'database',
-            message: 'Which database engine would you like to use?',
-            choices: ['MySQL'],
-            filter: function (val) {
-                return val.toLowerCase();
-            }
-        },
-        {
-            type: 'list',
-            name: 'lang',
-            message: 'Which programming language would you like to use?',
-            choices: ['Javascript', 'Typescript'],
-            filter: function (val) {
-                return val.toLowerCase();
-            }
-        },
-        {
-            type: 'list',
-            name: 'license',
-            default: 'UNLICENSED',
-            message: 'Which license would you like to use?',
-            choices: licenses
-        }, {
-            type: 'input',
-            name: 'port',
-            message: "Which port will you use ?",
-            default: '3000',
-            validate: function (value) {
-                let validarCaracteres = value.match(/[0-9]/);
+    let usedPrompts = [];
 
-                if (validarCaracteres)
-                    return true;
+    let inputs = {};
+    let answer = {};
 
-                return 'Please enter a valid port';
-            }
-        },
-    ]);
+     
 
-    let projectPath = await gen.generate(answer);
+    if (args.y) {
+        answer.name = name.default;
+        answer.rest = example.default;
+        answer.database = database.default;
+        answer.typescript = typescript.default;
+        answer.license = license.default;
+        answer.port = port.default;
+    }
+
+    if (args._.length > 0) inputs.name = args._.join('_') || 'generated_backend';
+    else if (!args.y) usedPrompts.push(name);
+
+
+    if (args.example) inputs.rest = true;
+    else if (!args.y) usedPrompts.push(example);
+
+    if (args.db) inputs.database = (args.db + '').toLowerCase() || 'mysql';
+    else if (!args.y) usedPrompts.push(database);
+
+    if (args.ts) inputs.ts = true;
+    else if (!args.y) usedPrompts.push(typescript);
+
+    if (args.license) inputs.license = args.license || 'UNLICENSED';
+    else if (!args.y) usedPrompts.push(license);
+
+    if (args.port) inputs.port = args.license || 3000;
+    else if (!args.y) usedPrompts.push(port);
+
+    if (usedPrompts.length > 0)
+        answer = await inquirer.prompt(usedPrompts);
+
+    let options = {
+        ...answer,
+        ...inputs
+    };
+    
+    let projectPath = await gen.generate(options);
 
     console.log(`done ;)
 

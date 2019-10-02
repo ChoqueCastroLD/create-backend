@@ -7,7 +7,7 @@ module.exports = {
     async generate(options = {}) {
         // options > name & database & sockets & rest        
 
-        let lang = options.lang === 'typescript' ? 'ts' : 'js';
+        let lang = options.ts ? 'ts' : 'js';
 
         let getOutput = (somePath = '') => `./${options.name}/${somePath}`;
         let getTemplate = (somePath = '') => path.resolve(__dirname, `./template/${lang}/${somePath}`);
