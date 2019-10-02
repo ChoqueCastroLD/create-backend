@@ -9,8 +9,6 @@ const prompts = require('./prompts.js');
 async function main() {
     console.log("What a beatiful day to write some beautiful code!\nLet's begin\n\n-github.com/ChoqueCastroLD");
 
-    console.log(args);
-
     let {
         name,
         example,
@@ -62,7 +60,7 @@ async function main() {
         ...answer,
         ...inputs
     };
-    
+
     let projectPath = await gen.generate(options);
 
     console.log(`done ;)
