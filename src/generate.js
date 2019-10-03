@@ -23,6 +23,7 @@ module.exports = {
         let opt = { recursive: true };
 
         // Generate folder structure
+        fs.mkdirSync(getOutput(``), opt);
         fs.mkdirSync(getOutput(`/src`), opt);
         fs.mkdirSync(getOutput(`/src/config`), opt);
         fs.mkdirSync(getOutput(`/src/controllers`), opt);

@@ -1,6 +1,6 @@
 {
   "name": "create-backend",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "A CLI built in Node.js, to automate the process of creating a rest api / sockets backend basics",
   "main": "src/index.js",
   "bin": {
