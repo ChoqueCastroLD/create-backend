@@ -16,22 +16,28 @@
     "dependencies": {
         "cookie-parser": "^1.4.4",
         "cors": "^2.8.5",
-        "express": "^4.17.1",
         "http-status": "^1.3.2",
         "morgan": "^1.9.1",
-        "dotenv": "^8.1.0",
-        <% if(database == 'mysql') { %>
+        "dotenv": "^8.1.0",<% if(database == 'mysql') { %>
         "mysql2": "^1.7.0",
-        <% } if(database == 'mariadb') { %>
-        "mariadb": "^2.1.1"
-        <% } if(database == 'postgres') { %>
+        "sequelize": "^5.19.2",<% } if(database == 'mariadb') { %>
+        "mariadb": "^2.1.1",
+        "sequelize": "^5.19.2",<% } if(database == 'postgres') { %>
         "pg": "^7.12.1",
         "pg-hstore": "^2.3.3",
-        <% } if(database == 'sqlite') { %>
+        "sequelize": "^5.19.2",<% } if(database == 'sqlite') { %>
         "sqlite3": "^2.17.1",
-        <% } if(database == 'mssql') { %>
+        "sequelize": "^5.19.2",<% } if(database == 'mssql') { %>
         "tedious": "^6.4.0",
-        <% } %>
-        "sequelize": "^5.19.2"
-    }
+        "sequelize": "^5.19.2",<% } if(database == 'mysql (no sequelize)') { %>
+        "mysql": "^2.17.1",<% } %>
+        "express": "^4.17.1"
+    }<% if(aliases === true) { %>,
+    "_moduleAliases": {
+      "@root"      : "src", // Application's root
+      "@config"      : "src/config", // Config folder
+      "@controllers" : "src/controllers", // Controllers folder
+      "@models" : "src/models", // Models folder
+      "@routes" : "src/routes" // Routes folder
+    }<% } %>
 }

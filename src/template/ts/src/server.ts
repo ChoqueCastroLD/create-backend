@@ -2,7 +2,12 @@
 
 import dotenv from "dotenv"
 import express from "express"
+<% if(logger === 'morgan') { %>
 import morgan from "morgan"
+<% } %>
+<% if(logger === 'voleyball') { %>
+import voleyball from "voleyball"
+<% } %>
 import cookieParser from "cookie-parser"
 import cors from "cors"
 
@@ -13,7 +18,11 @@ dotenv.config();
 
 // Load config
 
-import config from "./config/config"
+<% if(aliases === true) { %>
+import config from "@config/config";
+<% } else { %>
+import config from "../config/config";
+<% } %>
 
 // Instantiate an Express Application
 
@@ -23,7 +32,12 @@ const app = express();
 // Configure Express App Instance
 app.use(express.json( { limit: '50mb' } ));
 app.use(express.urlencoded( { extended: true, limit: '10mb' } ));
+<% if(logger === 'morgan') { %>
 app.use(morgan(config.app.logFormat));
+<% } %>
+<% if(logger === 'voleyball') { %>
+app.use(volleyball);
+<% } %>
 app.use(cookieParser());
 app.use(cors());
 

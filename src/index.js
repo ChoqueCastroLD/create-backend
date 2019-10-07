@@ -15,7 +15,9 @@ async function main() {
         database,
         typescript,
         license,
-        port
+        port,
+        logger,
+        aliases
     } = prompts;
 
     let usedPrompts = [];
@@ -32,17 +34,24 @@ async function main() {
         answer.ts = typescript.default;
         answer.license = license.default;
         answer.port = port.default;
+        answer.aliases = aliases.default;
+        answer.logger = logger.default;
     }
 
     if (args._.length > 0) inputs.name = args._.join('_') || 'generated_backend';
     else if (!args.y) usedPrompts.push(name);
 
+    if (args.aliases) inputs.aliases = true;
+    else if (!args.y) usedPrompts.push(aliases);
 
     if (args.example) inputs.rest = true;
     else if (!args.y) usedPrompts.push(example);
 
     if (args.db) inputs.database = (args.db + '').toLowerCase() || 'mysql';
     else if (!args.y) usedPrompts.push(database);
+
+    if (args.logger) inputs.logger = (args.logger + '').toLowerCase() || 'morgan';
+    else if (!args.y) usedPrompts.push(logger);
 
     if (args.ts) inputs.ts = true;
     else if (!args.y) usedPrompts.push(typescript);

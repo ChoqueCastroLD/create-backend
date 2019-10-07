@@ -23,12 +23,23 @@ module.exports = {
         message: 'Should we include a User endpoint example?'
     },
 
+    logger: {
+        type: 'list',
+        name: 'logger',
+        default: 'morgan',
+        message: 'Which logger would you like to use?',
+        choices: ['morgan', 'voleyball'],
+        filter: function (val) {
+            return val.toLowerCase();
+        }
+    },
+
     database: {
         type: 'list',
         name: 'database',
         default: 'mysql',
         message: 'Which database engine would you like to use?',
-        choices: ['MySQL', 'MariaDB', 'Postgres', 'MSSQL', 'sqlite'],
+        choices: ['MySQL (No Sequelize)', 'MySQL', 'MariaDB', 'Postgres', 'MSSQL', 'sqlite'],
         filter: function (val) {
             return val.toLowerCase();
         }
@@ -39,6 +50,13 @@ module.exports = {
         name: 'ts',
         default: false,
         message: 'Would you like to use Typescript?'
+    },
+
+    aliases: {
+        type: 'confirm',
+        name: 'aliases',
+        default: false,
+        message: 'Would you like to use Aliases?'
     },
 
     license: {

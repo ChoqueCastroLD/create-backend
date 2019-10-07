@@ -23,9 +23,11 @@ Argument | Values | Default | Description
 --- | --- | --- | ---
 **-y** | *none* | *none* | Skip all prompts
 **--name** | :String | 'generated_backend' | Project Name
-**--db** | *mysql* or *mariadb* or *sqlite* or *mssql* or *postgres* | *mysql* | Database engine to be used
+**--db** | *mysql* or *mariadb* or *sqlite* or *mssql* or *postgres* or *mysql_ns* (No Sequelize) | *mysql_ns* (No Sequelize) | Database engine to be used
+**--logger** | *morgan* or *voleyball* | *morgan* | Which logger will be used
 **--example** | *none* | *none* | Adds an example endpoint
 **-ts** | *none* | *none* | Use Typescript instead on Vanilla Javascript
+**--aliases** | *none* | *none* | Use Aliases for Modules require's
 **--license** | see licenses.js | 'UNLICENSED' | Which license will be used
 **--port** | :Number | 3000 | Which license will be used
 
