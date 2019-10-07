@@ -5,7 +5,7 @@ import usersModel from "@models/Users";
 import usersModel from "../models/Users";
 <% } %>
 
-<% if(database == 'mysql (no sequelize)') { %
+<% if(database == 'mysql (no sequelize)') { %>
 export default {
     async getUserById(req, res){
         try {
