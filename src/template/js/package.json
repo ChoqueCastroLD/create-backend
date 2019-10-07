@@ -34,10 +34,10 @@
         "express": "^4.17.1"
     }<% if(aliases === true) { %>,
     "_moduleAliases": {
-      "@root"      : "src", // Application's root
-      "@config"      : "src/config", // Config folder
-      "@controllers" : "src/controllers", // Controllers folder
-      "@models" : "src/models", // Models folder
-      "@routes" : "src/routes" // Routes folder
+      "@root"      : "src",
+      "@config"      : "src/config",
+      "@controllers" : "src/controllers",
+      "@models" : "src/models",
+      "@routes" : "src/routes"
     }<% } %>
 }
