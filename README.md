@@ -1,6 +1,20 @@
 # create-backend
 A CLI built in Node.js, to automate the process of creating a rest api / sockets backend basics
 
+
+## Features
+
+✓ Support lots of relational databases (*mysql*,*sqlite*, *mssql*, *postgres*, *etc*)
+✓ Sequelize Support
+✓ Morgan and Voleyball loggers
+✓ Fully ready-to-use Typescript and Vanilla Javascript support
+✓ More than 35 Licenses
+✓ Module Aliases support
+✓ Example Endpoint
+✓ Fully configured enviroment variables
+✓ Production ready
+✓ Bulletproof Folder Structure
+
 ## Install (Optional)
 
 Install using NPM:
@@ -48,7 +62,7 @@ using javascript and mariadb
 
 ## TODO
 1. Testing (Jest, Mocha)
-2. M0r3 databases
+2. M0r3 databases (MongoDb)
 3. Microservices
 4. Generate backend based on .sql script
 
