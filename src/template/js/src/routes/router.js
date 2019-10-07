@@ -6,8 +6,7 @@ const router = require('express').Router();
 router.use('/users', require('@routes/userRoutes'));
 <% } else { %>
 router.use('/users', require('./userRoutes'));
-<% } %>
-<% } else { %>
+<% } } else { %>
 // You can require and use your routes here ;)
 <% } %>
 

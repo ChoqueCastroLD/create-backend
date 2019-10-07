@@ -1,27 +1,24 @@
+
 // Require Dependencies
 
-import dotenv from "dotenv"
-import express from "express"
-<% if(logger === 'morgan') { %>
-import morgan from "morgan"
-<% } if(logger === 'voleyball') { %>
-import voleyball from "voleyball"
-<% } %>
-import cookieParser from "cookie-parser"
-import cors from "cors"
+const express = require('express');
+
+const morgan = require('morgan');
+
+
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 // Load .env Enviroment Variables to process.env
 
-dotenv.config();
+require('dotenv').config();
 
 
 // Load config
 
-<% if(aliases === true) { %>
-import config from "@config/config";
-<% } else { %>
-import config from "../config/config";
-<% } %>
+const config = require('./config/config.js');
+
+
 
 // Instantiate an Express Application
 
@@ -31,12 +28,10 @@ const app = express();
 // Configure Express App Instance
 app.use(express.json( { limit: '50mb' } ));
 app.use(express.urlencoded( { extended: true, limit: '10mb' } ));
-<% if(logger === 'morgan') { %>
+
 app.use(morgan(config.app.logFormat));
-<% } %>
-<% if(logger === 'voleyball') { %>
-app.use(volleyball);
-<% } %>
+
+
 app.use(cookieParser());
 app.use(cors());
 
@@ -47,8 +42,9 @@ app.use('*', (req, res, next) => {
 })
 
 // Assign Routes
-import router from "./routes/router"
-app.use('/', router);
+
+app.use('/', require('./routes/router.js'));
+
 
 // Handle not valid route
 app.use('*', (req, res) => {

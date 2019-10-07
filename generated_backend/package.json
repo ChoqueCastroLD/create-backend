@@ -1,0 +1,25 @@
+{
+    "name": "generated_backend",
+    "version": "1.0.0",
+    "description": "generated_backend is the ultimate backend solution",
+    "main": "src/server.js",
+    "scripts": {
+        "setup": "npm install && npm update",
+        "start": "node src/server.js"
+    },
+    "keywords": [
+        "express",
+        "backend",
+        "generated_backend"
+    ],
+    "license": "AFL-3.0",
+    "dependencies": {
+        "cookie-parser": "^1.4.4",
+        "cors": "^2.8.5",
+        "http-status": "^1.3.2",
+        "morgan": "^1.9.1",
+        "dotenv": "^8.1.0",
+        "mysql": "^2.17.1",
+        "express": "^4.17.1"
+    }
+}
