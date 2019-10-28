@@ -6,7 +6,7 @@ const {
 } = process.env;
 
 <% if(database == 'mysql (no sequelize)') { %>
-const mysqlm = require('mysqlm.js');
+const mysqlm = require('mysqlm');
 
 module.exports = mysqlm.connect({
     host: DB_HOST,
