@@ -55,13 +55,23 @@ app.use('/', require('@routes/router.js'));
 app.use('/', require('./routes/router.js'));
 <% } %>
 
+// Handle errors
+app.use((err, req, res, next) => {
+    if(err){
+        res
+        .status(409)
+        .send({status: false,message: err+''});
+    } else {
+        next();
+    }
+});
+
 // Handle not valid route
 app.use('*', (req, res) => {
     res
     .status(404)
     .json( {status: false, message: 'Endpoint Not Found'} );
 })
-
 // Open Server on configurated Port
 
 app.listen(

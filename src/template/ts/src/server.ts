@@ -3,7 +3,7 @@
 import 'module-alias/register';
 <% } %>
 // Require Dependencies
-import env from "dotenv"
+import env from "mandatoryenv"
 import express from "express"
 <% if(logger === 'morgan') { %>
 import morgan from "morgan"
@@ -50,6 +50,17 @@ app.use('*', (req, res, next) => {
 // Assign Routes
 import router from "./routes/router"
 app.use('/', router);
+
+// Handle errors
+app.use((err, req, res, next) => {
+    if(err){
+        res
+        .status(409)
+        .send({status: false,message: err+''});
+    } else {
+        next();
+    }
+});
 
 // Handle not valid route
 app.use('*', (req, res) => {

@@ -26,7 +26,6 @@ const db = new Sequelize(DB_DATABASE, DB_USER, DB_PASSWORD, {
         idle: 10000
     },
     dialect: '<%= database %>',
-    <% if(database == 'mssql') { %>
     dialectOptions: {
         options: {
             useUTC: false,
