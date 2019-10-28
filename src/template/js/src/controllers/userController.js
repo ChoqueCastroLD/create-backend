@@ -7,7 +7,7 @@ const userModel = require('../models/Users.js');
 <% console.log(database); %>
 <% if(database == 'mysql (no sequelize)') { %>
 module.exports = {
-    async getUserById(req, res){
+    async getUserById(req, res, next){
         try {
             let {id} = req.params;
 
@@ -23,12 +23,10 @@ module.exports = {
                 .json({status: false, message: 'You did not specified all needed parameters'});
             }
         } catch (err) {
-            res
-            .status(httpStatus.CONFLICT)
-            .json({status: false, message: 'Sometimes things go wrong :(', err});
+            next(err);
         }
     },
-    async getUsers(req, res){
+    async getUsers(req, res, next){
         try {
             let data = await userModel.getAll();
 
@@ -36,12 +34,10 @@ module.exports = {
 
             res.json({status: true, message, data});
         } catch (err) {
-            res
-            .status(httpStatus.CONFLICT)
-            .json({status: false, message: 'Sometimes things go wrong :(', err});
+            next(err);
         }
     },
-    async newUser(req, res){
+    async newUser(req, res, next){
         try {
             let { name, email } = req.body;
             
@@ -54,13 +50,11 @@ module.exports = {
                 .status(httpStatus.BAD_REQUEST)
                 .json({status: false, message: 'You did not specified all needed parameters'});
             }
-        } catch (error) {
-            res
-            .status(httpStatus.CONFLICT)
-            .json({status: false, message: 'Adding user failed', data});
+        } catch (err) {
+            next(err);
         }
     },
-    async updateUser(req, res){
+    async updateUser(req, res, next){
         try {
             let { id, name, email } = req.body;
             
@@ -73,13 +67,11 @@ module.exports = {
                 .status(httpStatus.BAD_REQUEST)
                 .json({status: false, message: 'You did not specified all needed parameters'});
             }
-        } catch (error) {
-            res
-            .status(httpStatus.CONFLICT)
-            .json({status: false, message: 'Could not update user', err});            
+        } catch (err) {
+            next(err);         
         }
     },
-    async deleteUser(req, res){
+    async deleteUser(req, res, next){
         try {
             let { id } = req.params;
 
@@ -93,15 +85,13 @@ module.exports = {
                 .json({status: false, message: 'You did not specified all needed parameters'});
             }
         } catch(err) {
-            res
-            .status(httpStatus.CONFLICT)
-            .json({status: false, message: "Deleting user failed", err});
+            next(err);
         }
     }
 }
 <% } else { %>
 module.exports = {
-    async getUserById(req, res){
+    async getUserById(req, res, next){
         try {
             let {id} = req.params;
 
@@ -117,12 +107,10 @@ module.exports = {
                 .json({status: false, message: 'You did not specified all needed parameters'});
             }
         } catch (err) {
-            res
-            .status(httpStatus.CONFLICT)
-            .json({status: false, message: 'Sometimes things go wrong :(', err});
+            next(err);
         }
     },
-    async getUsers(req, res){
+    async getUsers(req, res, next){
         try {
             let data = await userModel.findAll();
 
@@ -130,12 +118,10 @@ module.exports = {
 
             res.json({status: true, message, data});
         } catch (err) {
-            res
-            .status(httpStatus.CONFLICT)
-            .json({status: false, message: 'Sometimes things go wrong :(', err});
+            next(err);
         }
     },
-    async newUser(req, res){
+    async newUser(req, res, next){
         try {
             let { name, email } = req.body;
             
@@ -148,13 +134,11 @@ module.exports = {
                 .status(httpStatus.BAD_REQUEST)
                 .json({status: false, message: 'You did not specified all needed parameters'});
             }
-        } catch (error) {
-            res
-            .status(httpStatus.CONFLICT)
-            .json({status: false, message: 'Adding user failed', data});
+        } catch (err) {
+            next(err);
         }
     },
-    async updateUser(req, res){
+    async updateUser(req, res, next){
         try {
             let { id, name, email } = req.body;
             
@@ -167,13 +151,13 @@ module.exports = {
                 .status(httpStatus.BAD_REQUEST)
                 .json({status: false, message: 'You did not specified all needed parameters'});
             }
-        } catch (error) {
+        } catch (err) {
             res
             .status(httpStatus.CONFLICT)
             .json({status: false, message: 'Could not update user', err});            
         }
     },
-    async deleteUser(req, res){
+    async deleteUser(req, res, next){
         try {
             let { id } = req.params;
 
@@ -187,9 +171,7 @@ module.exports = {
                 .json({status: false, message: 'You did not specified all needed parameters'});
             }
         } catch(err) {
-            res
-            .status(httpStatus.CONFLICT)
-            .json({status: false, message: "Deleting user failed", err});
+            next(err);
         }
     }
 }
