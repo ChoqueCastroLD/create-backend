@@ -4,7 +4,7 @@ const userModel = require('@models/Users.js');
 <% } else { %>
 const userModel = require('../models/Users.js');
 <% } %>
-
+<% console.log(database); %>
 <% if(database == 'mysql (no sequelize)') { %>
 module.exports = {
     async getUserById(req, res){
