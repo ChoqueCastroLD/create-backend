@@ -1,6 +1,9 @@
+<% if(aliases === true) { %>
+// Register module/require aliases
+import 'module-alias/register';
+<% } %>
 // Require Dependencies
-
-import dotenv from "dotenv"
+import env from "dotenv"
 import express from "express"
 <% if(logger === 'morgan') { %>
 import morgan from "morgan"
@@ -11,17 +14,15 @@ import cookieParser from "cookie-parser"
 import cors from "cors"
 
 // Load .env Enviroment Variables to process.env
-
-dotenv.config();
-
-
-// Load config
-
-<% if(aliases === true) { %>
-import config from "@config/config";
-<% } else { %>
-import config from "../config/config";
-<% } %>
+env.load([
+    'DB_HOST',
+    'DB_DATABASE',
+    'DB_USER',
+    'DB_PASSWORD',
+    'PORT',
+    'SECRET_KEY'
+]);
+const { PORT } = process.env;
 
 // Instantiate an Express Application
 
@@ -32,7 +33,7 @@ const app = express();
 app.use(express.json( { limit: '50mb' } ));
 app.use(express.urlencoded( { extended: true, limit: '10mb' } ));
 <% if(logger === 'morgan') { %>
-app.use(morgan(config.app.logFormat));
+app.use(morgan('dev'));
 <% } %>
 <% if(logger === 'voleyball') { %>
 app.use(volleyball);
@@ -54,12 +55,12 @@ app.use('/', router);
 app.use('*', (req, res) => {
     res
     .status(404)
-    .json( {msg: 'Endpoint Not Found'} );
+    .json( {status: false, message: 'Endpoint Not Found'} );
 })
 
 // Open Server on configurated Port
 
 app.listen(
-    config.app.port,
-    () => console.info('Server listening on port ', config.app.port)
+    PORT,
+    () => console.info('Server listening on port ', PORT)
 );

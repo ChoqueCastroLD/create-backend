@@ -4,23 +4,36 @@ A CLI built in Node.js, to automate the process of creating a rest api / sockets
 
 ## Features
 
-✓ Support lots of relational databases (*mysql*,*sqlite*, *mssql*, *postgres*, *etc*)
-✓ Sequelize Support
+✓ Support lots of relational databases (Sequelize and Mysqlm)
+
+✓ Sequelize(Mysql, Postgre, Microsoft Sql, Mariadb) Support
+
+✓ Myslm support (Promise Query Streams)
+
 ✓ Morgan and Voleyball loggers
+
 ✓ Fully ready-to-use Typescript and Vanilla Javascript support
+
 ✓ More than 35 Licenses
+
 ✓ Module Aliases support
+
 ✓ Example Endpoint
+
 ✓ Fully configured enviroment variables
+
 ✓ Production ready
+
 ✓ Bulletproof Folder Structure
 
-## Install (Optional)
+## Install (Optional but not Recommended)
 
 Install using NPM:
 ```sh
 npm install create-backend -g
 ```
+
+(You can use this module using NPX, npx comes bundled with npm)
 
 ## Usage
 
@@ -37,7 +50,7 @@ Argument | Values | Default | Description
 --- | --- | --- | ---
 **-y** | *none* | *none* | Skip all prompts
 **--name** | :String | 'generated_backend' | Project Name
-**--db** | *mysql* or *mariadb* or *sqlite* or *mssql* or *postgres* or *mysql_ns* (No Sequelize) | *mysql_ns* (No Sequelize) | Database engine to be used
+**--db** | *mysql* or *mariadb* or *mssql* or *postgres* or *mysql_ns* (No Sequelize) | *mysql_ns* (No Sequelize) | Database engine to be used
 **--logger** | *morgan* or *voleyball* | *morgan* | Which logger will be used
 **--example** | *none* | *none* | Adds an example endpoint
 **-ts** | *none* | *none* | Use Typescript instead on Vanilla Javascript

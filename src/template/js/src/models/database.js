@@ -1,45 +1,31 @@
+const {
+    DB_HOST,
+    DB_DATABASE,
+    DB_USER,
+    DB_PASSWORD
+} = process.env;
+
 <% if(database == 'mysql (no sequelize)') { %>
-const mysql = require('mysql.js');
-<% if(aliases === true) { %>
-const config = require('@config/config.js');
-<% } else { %>
-const config = require('../config/config.js');
-<% } %>
+const mysqlm = require('mysqlm.js');
 
-const db = {
-    /**
-     *  Queries the database
-     * 
-     * @param {String} query - Query string to be executed
-     * @param {Array<Object>} input - Input parameters for prepared statements
-     */
-    async query(query = '', input = []) {
-        return new Promise((resolve, reject) => {
-            pool.query(query, input,(err, result)=>{
-                if(err) reject(err);
-                else resolve(result);
-            })
-        })
-    }
-}
-
+module.exports = mysqlm.connect({
+    host: DB_HOST,
+    database: DB_DATABASE,
+    user: DB_USER,
+    password: DB_PASSWORD
+})
 <% } else { %>
 const Sequelize = require('sequelize');
-<% if(aliases === true) { %>
-const config = require('@config/config.js');
-<% } else { %>
-const config = require('../config/config.js');
-<% } %>
 
-const db = new Sequelize(config.database.database, config.database.user, config.database.password, {
-    host: config.database.host,
+const db = new Sequelize(DB_DATABASE, DB_USER, DB_PASSWORD, {
+    host: DB_HOST,
     pool: {
-        max: config.database.connectionLimit,
+        max: 10,
         min: 0,
         acquire: 30000,
         idle: 10000
     },
-    dialect: config.database.engine,
+    dialect: <%= database %>,
     <% if(database == 'mssql') { %>
     dialectOptions: {
         options: {
@@ -47,14 +33,10 @@ const db = new Sequelize(config.database.database, config.database.user, config.
             dateFirst: 1,
         }
     },
-    <% } if(database == 'sqlite') { %>
-    storage: config.database.storage,
-    <% } %>
     define: {
         timestamps: false
     }
 });
 
-<% } %>
-
 module.exports = db;
+<% } %>

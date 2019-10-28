@@ -2,6 +2,17 @@
 // Register module/require aliases
 require('module-alias/register');
 <% } %>
+// Load .env Enviroment Variables to process.env
+require('mandatoryenv').load([
+    'DB_HOST',
+    'DB_DATABASE',
+    'DB_USER',
+    'DB_PASSWORD',
+    'PORT',
+    'SECRET_KEY'
+]);
+const { PORT } = process.env;
+
 // Require Dependencies
 
 const express = require('express');
@@ -14,19 +25,6 @@ const voleyball = require('voleyball');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
-// Load .env Enviroment Variables to process.env
-
-require('dotenv').config();
-
-
-// Load config
-<% if(aliases === true) { %>
-const config = require('@config/config.js');
-<% } else { %>
-const config = require('./config/config.js');
-<% } %>
-
-
 // Instantiate an Express Application
 
 const app = express();
@@ -36,7 +34,7 @@ const app = express();
 app.use(express.json( { limit: '50mb' } ));
 app.use(express.urlencoded( { extended: true, limit: '10mb' } ));
 <% if(logger === 'morgan') { %>
-app.use(morgan(config.app.logFormat));
+app.use(morgan('dev'));
 <% } %>
 <% if(logger === 'voleyball') { %>
 app.use(volleyball);
@@ -61,12 +59,12 @@ app.use('/', require('./routes/router.js'));
 app.use('*', (req, res) => {
     res
     .status(404)
-    .json( {msg: 'Endpoint Not Found'} );
+    .json( {status: false, message: 'Endpoint Not Found'} );
 })
 
 // Open Server on configurated Port
 
 app.listen(
-    config.app.port,
-    () => console.info('Server listening on port ', config.app.port)
+    PORT,
+    () => console.info('Server listening on port ', PORT)
 );

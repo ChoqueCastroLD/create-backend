@@ -18,24 +18,22 @@
         "cors": "^2.8.5",
         "http-status": "^1.3.2",
         "morgan": "^1.9.1",
-        "dotenv": "^8.1.0",<% if(database == 'mysql') { %>
+        "mandatoryenv": "^1.1.1",
+        "module-alias": "^2.2.2",<% if(database == 'mysql') { %>
         "mysql2": "^1.7.0",
         "sequelize": "^5.19.2",<% } if(database == 'mariadb') { %>
         "mariadb": "^2.1.1",
         "sequelize": "^5.19.2",<% } if(database == 'postgres') { %>
         "pg": "^7.12.1",
         "pg-hstore": "^2.3.3",
-        "sequelize": "^5.19.2",<% } if(database == 'sqlite') { %>
-        "sqlite3": "^2.17.1",
         "sequelize": "^5.19.2",<% } if(database == 'mssql') { %>
         "tedious": "^6.4.0",
         "sequelize": "^5.19.2",<% } if(database == 'mysql (no sequelize)') { %>
-        "mysql": "^2.17.1",<% } %>
+        "mysqlm": "^1.5.0",<% } %>
         "express": "^4.17.1"
     }<% if(aliases === true) { %>,
     "_moduleAliases": {
       "@root"      : "src",
-      "@config"      : "src/config",
       "@controllers" : "src/controllers",
       "@models" : "src/models",
       "@routes" : "src/routes"

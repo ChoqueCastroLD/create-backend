@@ -25,10 +25,12 @@ module.exports = {
         // Generate folder structure
         fs.mkdirSync(getOutput(``), opt);
         fs.mkdirSync(getOutput(`/src`), opt);
-        fs.mkdirSync(getOutput(`/src/config`), opt);
         fs.mkdirSync(getOutput(`/src/controllers`), opt);
         fs.mkdirSync(getOutput(`/src/models`), opt);
         fs.mkdirSync(getOutput(`/src/routes`), opt);
+
+        // Generate .env
+        renderFile(`.env`, options);
 
         // Generate package.json
         renderFile(`package.json`, options);
@@ -40,9 +42,6 @@ module.exports = {
 
         // Generate server index
         renderFile(`src/server.${lang}`, options);
-
-        // Generate config
-        renderFile(`src/config/config.${lang}`, options);
 
         // Generate database model
         renderFile(`src/models/database.${lang}`, options);
