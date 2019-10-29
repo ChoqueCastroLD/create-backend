@@ -5,7 +5,7 @@ const db = require('@models/database.js');
 const db = require('./database.js');
 <% } %>
 
-const User = {
+const user = {
     /** Returns an array of users */
     async getAll(){
         let result = await db.query('SELECT id, name, email FROM users');
@@ -40,7 +40,7 @@ const db = require('@models/database.js');
 const db = require('./database.js');
 <% } %>
 
-const User = db.define('users', {
+const user = db.define('users', {
     id: {
         primaryKey: true,
         type: Sequelize.NUMBER
@@ -54,4 +54,4 @@ const User = db.define('users', {
 })
 <% } %>
 
-module.exports = User;
+module.exports = user;

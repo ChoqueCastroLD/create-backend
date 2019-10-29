@@ -1,8 +1,8 @@
 import httpStatus from "http-status";
 <% if(aliases === true) { %>
-import usersModel from "@models/Users";
+import usersModel from "@models/users";
 <% } else { %>
-import usersModel from "../models/Users";
+import usersModel from "../models/users";
 <% } %>
 
 <% if(database == 'mysql (no sequelize)') { %>

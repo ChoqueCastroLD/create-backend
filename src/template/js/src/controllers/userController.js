@@ -1,8 +1,8 @@
 const httpStatus = require('http-status');
 <% if(aliases === true) { %>
-const userModel = require('@models/Users.js');
+const userModel = require('@models/users.js');
 <% } else { %>
-const userModel = require('../models/Users.js');
+const userModel = require('../models/users.js');
 <% } %>
 <% console.log(database); %>
 <% if(database == 'mysql (no sequelize)') { %>

@@ -50,7 +50,7 @@ module.exports = {
         renderFile(`src/routes/router.${lang}`, options);
 
         if (options.rest) {
-            renderFile(`src/models/Users.${lang}`, options);
+            renderFile(`src/models/users.${lang}`, options);
             renderFile(`src/controllers/userController.${lang}`, options);
             renderFile(`src/routes/userRoutes.${lang}`, options);
         }

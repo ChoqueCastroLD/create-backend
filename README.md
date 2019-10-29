@@ -8,7 +8,7 @@ A CLI built in Node.js, to automate the process of creating a rest api / sockets
 
 ✓ Sequelize(Mysql, Postgre, Microsoft Sql, Mariadb) Support
 
-✓ Myslm support (Promise Query Streams)
+✓ Mysqlm support (Promise Query Streams)
 
 ✓ Morgan and Voleyball loggers
 

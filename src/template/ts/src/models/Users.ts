@@ -5,7 +5,7 @@ import db from "@models/database";
 import db from "../models/database";
 <% } %>
 
-const User = {
+const user = {
     /** Returns an array of users */
     async getAll(){
         let result = await db.query('SELECT id, name, email FROM users');
@@ -41,7 +41,7 @@ import db from "@models/database";
 import db from "../models/database";
 <% } %>
 
-const User = db.define('users', {
+const user = db.define('users', {
     id: {
         primaryKey: true,
         type: Sequelize.NUMBER
@@ -55,4 +55,4 @@ const User = db.define('users', {
 })
 <% } %>
 
-export default User;
+export default user;
