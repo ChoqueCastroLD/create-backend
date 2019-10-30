@@ -13,6 +13,9 @@ require('mandatoryenv').load([
 ]);
 const { PORT } = process.env;
 
+// Patches
+require('express-exception-handler').handle(); // Patch express in order to use async / await syntax
+
 // Require Dependencies
 
 const express = require('express');

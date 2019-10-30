@@ -5,172 +5,114 @@ import usersModel from "@models/users";
 import usersModel from "../models/users";
 <% } %>
 
+import has from "has-keys";
+
 <% if(database == 'mysql (no sequelize)') { %>
 export default {
-    async getUserById(req, res, next){
-        try {
-            let {id} = req.params;
+    async getUserById(req, res){
+        if(!has(req.params, 'id'))
+            throw {code: s.BAD_REQUEST, message: 'You must specify the ID'};
 
-            if(id){
-                let data = await usersModel.getById(id);
-    
-                let message = (data) ? 'User found' : 'User not found';
-                
-                res.json({status: true, message, data});
-            } else {
-                res
-                .status(httpStatus.BAD_REQUEST)
-                .json({status: false, message: 'You did not specified all needed parameters'});
-            }
-        } catch (err) {
-            next(err);
-        }
+        let {id} = req.params;
+
+        let data = await usersModel.getById(id);
+
+        if(data.length > 0)
+            res.json({status: true, message: 'Returning user', data});
+        else
+            res.json({status: false, message: 'User not found'});
     },
-    async getUsers(req, res, next){
-        try {
-            let data = await usersModel.getAll();
+    async getUsers(req, res){
+        let data = await usersModel.getAll();
 
-            let message = (data.length > 0) ? 'Users found' : 'There are no users';
-
-            res.json({status: true, message, data});
-        } catch (err) {
-            next(err);
-        }
+        if(data.length > 0)
+            res.json({status: true, message: 'Returning users', data});
+        else
+            res.json({status: false, message: 'Users not found'});
     },
-    async newUser(req, res, next){
-        try {
-            let { name, email } = req.body;
-            
-            if(name && email){
-                let data = await usersModel.create(name, email);
+    async newUser(req, res){
+        if(!has(req.params, ['name', 'email']))
+            throw {code: s.BAD_REQUEST, message: 'You must specify the name and email'};
 
-                res.json({status: true, message: 'User added, returning added user id', id: data});
-            } else {
-                res
-                .status(httpStatus.BAD_REQUEST)
-                .json({status: false, message: 'You did not specified all needed parameters'});
-            }
-        } catch (err) {
-            next(err);
-        }
+        let { name, email } = req.body;
+        
+        await usersModel.create(name, email);
+
+        res.json({status: true, message: 'User added'});
     },
-    async updateUser(req, res, next){
-        try {
-            let { id, name, email } = req.body;
-            
-            if(id && name && email){
-                let data = await usersModel.update(id, name, email);
+    async updateUser(req, res){
+        if(!has(req.params, ['id', 'name', 'email']))
+            throw {code: s.BAD_REQUEST, message: 'You must specify the id, name and email'};
 
-                res.json({status: true, message: 'User updated successfully', data});
-            } else {
-                res
-                .status(httpStatus.BAD_REQUEST)
-                .json({status: false, message: 'You did not specified all needed parameters'});
-            }
-        } catch (err) {
-            next(err);           
-        }
+        let { id, name, email } = req.body;
+        
+        await usersModel.update(id, name, email);
+
+        res.json({status: true, message: 'User updated'});
     },
-    async deleteUser(req, res, next){
-        try {
-            let { id } = req.params;
+    async deleteUser(req, res){
+        if(!has(req.params, 'id'))
+            throw {code: s.BAD_REQUEST, message: 'You must specify the id'};
 
-            if(id){
-                let data = await usersModel.delete(id);
+        let { id } = req.params;
 
-                res.json({status: true, message: 'User deleted', data});
-            } else{
-                res
-                .status(httpStatus.BAD_REQUEST)
-                .json({status: false, message: 'You did not specified all needed parameters'});
-            }
-        } catch(err) {
-            next(err);
-        }
+        await usersModel.delete(id);
+
+        res.json({status: true, message: 'User deleted'});
     }
 }
 <% } else { %>
 export default {
-    async getUserById(req, res, next){
-        try {
-            let {id} = req.params;
+    async getUserById(req, res){
+        if(!has(req.params, 'id'))
+            throw {code: s.BAD_REQUEST, message: 'You must specify the id'};
 
-            if(id){
-                let data = await usersModel.findOne({where: {id}});
-    
-                let message = (data) ? 'User found' : 'User not found';
-                
-                res.json({status: true, message, data});
-            } else {
-                res
-                .status(httpStatus.BAD_REQUEST)
-                .json({status: false, message: 'You did not specified all needed parameters'});
-            }
-        } catch (err) {
-            next(err);
-        }
+        let {id} = req.params;
+
+        let data = await usersModel.findOne({where: {id}});
+
+        if(data.length > 0)
+            res.json({status: true, message: 'Returning user', data});
+        else
+            res.json({status: false, message: 'User not found'});
     },
-    async getUsers(req, res, next){
-        try {
-            let data = await usersModel.findAll();
+    async getUsers(req, res){
+        let data = await usersModel.findAll();
 
-            let message = (data.length > 0) ? 'Users found' : 'There are no users';
-
-            res.json({status: true, message, data});
-        } catch (err) {
-            next(err);
-        }
+        if(data.length > 0)
+            res.json({status: true, message: 'Returning users', data});
+        else
+            res.json({status: false, message: 'Users not found'});
     },
-    async newUser(req, res, next){
-        try {
-            let { name, email } = req.body;
+    async newUser(req, res){
+        if(!has(req.params, ['name', 'email']))
+            throw {code: s.BAD_REQUEST, message: 'You must specify the name and email'};
+
+        let { name, email } = req.body;
             
-            if(name && email){
-                let data = await usersModel.create({name, email});
+        let data = await usersModel.create({name, email});
 
-                res.json({status: true, message: 'User added, returning added user id', id: data});
-            } else {
-                res
-                .status(httpStatus.BAD_REQUEST)
-                .json({status: false, message: 'You did not specified all needed parameters'});
-            }
-        } catch (err) {
-            next(err);
-        }
+        res.json({status: true, message: 'User added'});
     },
-    async updateUser(req, res, next){
-        try {
-            let { id, name, email } = req.body;
+    async updateUser(req, res){
+        if(!has(req.params, ['id', 'name', 'email']))
+            throw {code: s.BAD_REQUEST, message: 'You must specify the id, name and email'};
+
+        let { id, name, email } = req.body;
             
-            if(id && name && email){
-                let data = await usersModel.updateUser({name, email}, {where:{id}});
+        let data = await usersModel.updateUser({name, email}, {where:{id}});
 
-                res.json({status: true, message: 'User updated successfully', data});
-            } else {
-                res
-                .status(httpStatus.BAD_REQUEST)
-                .json({status: false, message: 'You did not specified all needed parameters'});
-            }
-        } catch (err) {
-            next(err);           
-        }
+        res.json({status: true, message: 'User updated'});
     },
-    async deleteUser(req, res, next){
-        try {
-            let { id } = req.params;
+    async deleteUser(req, res){
+        if(!has(req.params, 'id'))
+            throw {code: s.BAD_REQUEST, message: 'You must specify the id'};
+            
+        let { id } = req.params;
 
-            if(id){
-                let data = await usersModel.destroy({where: {id}});
+        let data = await usersModel.destroy({where: {id}});
 
-                res.json({status: true, message: 'User deleted', data});
-            } else{
-                res
-                .status(httpStatus.BAD_REQUEST)
-                .json({status: false, message: 'You did not specified all needed parameters'});
-            }
-        } catch(err) {
-            next(err);
-        }
+        res.json({status: true, message: 'User deleted', data});
     }
 }
 <% } %>

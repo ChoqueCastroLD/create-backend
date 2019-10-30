@@ -1,3 +1,8 @@
+// Patches
+require('express-exception-handler').handle(); // Patch express in order to use async / await syntax
+import { handle } from "express-exception-handler"
+handle();
+
 <% if(aliases === true) { %>
 // Register module/require aliases
 import 'module-alias/register';
