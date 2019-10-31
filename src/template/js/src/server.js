@@ -2,19 +2,9 @@
 // Register module/require aliases
 require('module-alias/register');
 <% } %>
-// Load .env Enviroment Variables to process.env
-require('mandatoryenv').load([
-    'DB_HOST',
-    'DB_DATABASE',
-    'DB_USER',
-    'DB_PASSWORD',
-    'PORT',
-    'SECRET_KEY'
-]);
-const { PORT } = process.env;
 
 // Patches
-require('express-exception-handler').handle(); // Patch express in order to use async / await syntax
+require('express-custom-error').inject(); // Patch express in order to use async / await syntax
 
 // Require Dependencies
 
@@ -27,6 +17,18 @@ const voleyball = require('voleyball');
 <% } %>
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+
+// Load .env Enviroment Variables to process.env
+require('mandatoryenv').load([
+    'DB_HOST',
+    'DB_DATABASE',
+    'DB_USER',
+    'DB_PASSWORD',
+    'PORT',
+    'SECRET_KEY'
+]);
+const { PORT } = process.env;
+
 
 // Instantiate an Express Application
 
@@ -60,10 +62,22 @@ app.use('/', require('./routes/router.js'));
 
 // Handle errors
 app.use((err, req, res, next) => {
-    if(err){
+    if(err){ // Check if there's an error
+    <% if(rest) { %>
+        if(err.code && err.message){ // Handle custom error
+            res
+            .status(err.code)
+            .send({status: false,message: err.message});
+        } else { // Handle all other errors
+            res
+            .status(400)
+            .send({status: false,message: err});
+        }
+    <% } else { %>
         res
-        .status(409)
-        .send({status: false,message: err+''});
+        .status(400)
+        .send({status: false,message: err});
+    <% } %>
     } else {
         next();
     }
@@ -75,8 +89,8 @@ app.use('*', (req, res) => {
     .status(404)
     .json( {status: false, message: 'Endpoint Not Found'} );
 })
-// Open Server on configurated Port
 
+// Open Server on selected Port
 app.listen(
     PORT,
     () => console.info('Server listening on port ', PORT)

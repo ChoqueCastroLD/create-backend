@@ -16,6 +16,8 @@ A CLI built in Node.js, to automate the process of creating a rest api / sockets
 
 ✓ More than 35 Licenses
 
+✓ Express Ready for Promises (Async / Await)
+
 ✓ Module Aliases support
 
 ✓ Example Endpoint

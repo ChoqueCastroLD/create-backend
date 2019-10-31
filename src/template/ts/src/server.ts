@@ -1,12 +1,12 @@
-// Patches
-require('express-exception-handler').handle(); // Patch express in order to use async / await syntax
-import { handle } from "express-exception-handler"
-handle();
-
 <% if(aliases === true) { %>
 // Register module/require aliases
 import 'module-alias/register';
 <% } %>
+
+// Patches
+import { inject } from "express-custom-error" // Patch express in order to use async / await syntax
+inject();
+
 // Require Dependencies
 import env from "mandatoryenv"
 import express from "express"
@@ -58,10 +58,22 @@ app.use('/', router);
 
 // Handle errors
 app.use((err, req, res, next) => {
-    if(err){
+    if(err){// Check if there's an error
+    <% if(rest) { %>
+        if(err.code && err.message){ // Handle custom error
+            res
+            .status(err.code)
+            .send({status: false,message: err.message});
+        } else { // Handle all other errors
+            res
+            .status(400)
+            .send({status: false,message: err});
+        }
+    <% } else { %>
         res
-        .status(409)
-        .send({status: false,message: err+''});
+        .status(400)
+        .send({status: false,message: err});
+    <% } %>
     } else {
         next();
     }

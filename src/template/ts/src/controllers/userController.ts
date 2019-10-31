@@ -1,4 +1,4 @@
-import httpStatus from "http-status";
+import s from "http-status";
 <% if(aliases === true) { %>
 import usersModel from "@models/users";
 <% } else { %>
