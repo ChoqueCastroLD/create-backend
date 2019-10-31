@@ -5,8 +5,6 @@ const userModel = require('@models/users.js');
 const userModel = require('../models/users.js');
 <% } %>
 
-require('express-custom-error').inject();
-
 const has = require('has-keys');
 
 <% if(database == 'mysql (no sequelize)') { %>
