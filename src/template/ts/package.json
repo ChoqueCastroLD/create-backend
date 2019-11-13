@@ -38,7 +38,8 @@
         "sequelize": "^5.19.2",<% } if(database == 'mssql') { %>
         "tedious": "^6.4.0",
         "sequelize": "^5.19.2",<% } if(database == 'mysql (no sequelize)') { %>
-        "mysqlm": "^1.5.0",<% } %>
+        "mysqlm": "^1.5.0",<% } if(database == 'mongodb') { %>
+        "mongodb": "^3.3.3",<% } %>
         "express": "^4.17.1"
     }<% if(aliases === true) { %>,
     "_moduleAliases": {

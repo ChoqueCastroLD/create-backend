@@ -37,9 +37,9 @@ module.exports = {
     database: {
         type: 'list',
         name: 'database',
-        default: 'mysql',
+        default: 'MySQL (No Sequelize)',
         message: 'Which database engine would you like to use?',
-        choices: ['MySQL (No Sequelize)', 'MySQL', 'MariaDB', 'Postgres', 'MSSQL'],
+        choices: ['MySQL (No Sequelize)', 'MongoDb', 'MySQL', 'MariaDB', 'Postgres', 'MSSQL'],
         filter: function (val) {
             return val.toLowerCase();
         }

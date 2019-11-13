@@ -4,7 +4,7 @@ A CLI built in Node.js, to automate the process of creating a rest api / sockets
 
 ## Features
 
-✓ Support lots of relational databases (Sequelize and Mysqlm)
+✓ Support for ¡*MongoDb* and Mysql!
 
 ✓ Sequelize(Mysql, Postgre, Microsoft Sql, Mariadb) Support
 
@@ -77,9 +77,8 @@ using javascript and mariadb
 
 ## TODO
 1. Testing (Jest, Mocha)
-2. M0r3 databases (MongoDb)
-3. Microservices
-4. Generate backend based on .sql script
+2. Microservices
+3. Generate backend based on .sql script
 
 ---
 Screenshot:
