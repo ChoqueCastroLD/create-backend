@@ -31,6 +31,15 @@ module.exports = {
 
         // Generate .env
         renderFile(`.env`, options);
+        
+        // Generate readme
+        renderFile(`README.md`, options);
+        
+        // Generate .gitignore
+        renderFile(`.gitignore`, options);
+        
+        // Generate .gitignore
+        renderFile(`.gitignore`, options);
 
         // Generate package.json
         renderFile(`package.json`, options);
