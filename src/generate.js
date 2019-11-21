@@ -28,15 +28,14 @@ module.exports = {
         fs.mkdirSync(getOutput(`/src/controllers`), opt);
         fs.mkdirSync(getOutput(`/src/models`), opt);
         fs.mkdirSync(getOutput(`/src/routes`), opt);
-
-        // Generate .env
-        renderFile(`.env`, options);
+        
+        try {
+            // Generate .env
+            renderFile(`.env`, options);
+        } catch (error) {}
         
         // Generate readme
         renderFile(`README.md`, options);
-        
-        // Generate .gitignore
-        renderFile(`.gitignore`, options);
         
         // Generate .gitignore
         renderFile(`.gitignore`, options);
