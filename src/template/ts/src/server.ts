@@ -17,6 +17,10 @@ import voleyball from "voleyball"
 <% } %>
 import cookieParser from "cookie-parser"
 import cors from "cors"
+import helmet from "helmet"
+
+import winston from "winston"
+import expressWinston from "express-winston"
 
 // Load .env Enviroment Variables to process.env
 env.load([
@@ -27,6 +31,7 @@ env.load([
     'PORT',
     'SECRET_KEY'
 ]);
+
 const { PORT } = process.env;
 
 // Instantiate an Express Application
@@ -37,6 +42,21 @@ const app = express();
 // Configure Express App Instance
 app.use(express.json( { limit: '50mb' } ));
 app.use(express.urlencoded( { extended: true, limit: '10mb' } ));
+
+app.use(expressWinston.logger({
+    transports: [
+        new winston.transports.Console()
+    ],
+    format: winston.format.combine(
+        winston.format.colorize(),
+        winston.format.json()
+    ),
+    meta: true,
+    msg: " > {{res.statusCode}} {{req.method}} {{res.responseTime}}ms {{req.url}}",
+    expressFormat: true,
+    colorize: true
+}));
+
 <% if(logger === 'morgan') { %>
 app.use(morgan('dev'));
 <% } %>
@@ -45,6 +65,7 @@ app.use(volleyball);
 <% } %>
 app.use(cookieParser());
 app.use(cors());
+app.use(helmet());
 
 // This middleware adds the json header to every response
 app.use('*', (req, res, next) => {
