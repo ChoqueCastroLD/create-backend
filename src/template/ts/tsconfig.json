@@ -45,6 +45,7 @@
           "@root/*"      : ["/*"],
           "@controllers/*" : ["controllers/*"],
           "@models/*" : ["models/*"],
+          "@util/*" : ["util/*"],
           "@routes/*" : ["routes/*"]
       },
       // "rootDirs": [],                        /* List of root folders whose combined content represents the structure of the project at runtime. */

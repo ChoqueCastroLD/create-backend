@@ -9,18 +9,15 @@ require('express-custom-error').inject(); // Patch express in order to use async
 // Require Dependencies
 
 const express = require('express');
-<% if(logger === 'morgan') { %>
-const morgan = require('morgan');
-<% } %>
-<% if(logger === 'voleyball') { %>
-const voleyball = require('voleyball');
-<% } %>
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const helmet = require('helmet');
 
-const winston = require('winston');
-const expressWinston = require('express-winston');
+<% if(aliases === true) { %>
+const logger = require('@util/logger');
+<% } else { %>
+const logger = require('./util/logger');
+<% }%>
 
 // Load .env Enviroment Variables to process.env
 require('mandatoryenv').load([
@@ -31,6 +28,7 @@ require('mandatoryenv').load([
     'PORT',
     'SECRET_KEY'
 ]);
+
 const { PORT } = process.env;
 
 
@@ -43,26 +41,9 @@ const app = express();
 app.use(express.json( { limit: '50mb' } ));
 app.use(express.urlencoded( { extended: true, limit: '10mb' } ));
 
-app.use(expressWinston.logger({
-    transports: [
-        new winston.transports.Console()
-    ],
-    format: winston.format.combine(
-        winston.format.colorize(),
-        winston.format.json()
-    ),
-    meta: true,
-    msg: " > {{res.statusCode}} {{req.method}} {{res.responseTime}}ms {{req.url}}",
-    expressFormat: true,
-    colorize: true
-}));
+// Configure custom logger middleware
+app.use(logger.dev, logger.combined);
 
-<% if(logger === 'morgan') { %>
-app.use(morgan('dev'));
-<% } %>
-<% if(logger === 'voleyball') { %>
-app.use(volleyball);
-<% } %>
 app.use(cookieParser());
 app.use(cors());
 app.use(helmet());

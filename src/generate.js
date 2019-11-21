@@ -29,6 +29,7 @@ module.exports = {
         fs.mkdirSync(getOutput(`/src/controllers`), opt);
         fs.mkdirSync(getOutput(`/src/models`), opt);
         fs.mkdirSync(getOutput(`/src/routes`), opt);
+        fs.mkdirSync(getOutput(`/src/util`), opt);
     
         // Generate .env
         renderFile(`env.ejs`, options, `.env`);
@@ -55,6 +56,9 @@ module.exports = {
 
         // Generate router
         renderFile(`src/routes/router.${lang}`, options);
+        
+        // Generate logger
+        renderFile(`src/util/logger.${lang}`, options);
 
         if (options.rest) {
             renderFile(`src/models/users.${lang}`, options);

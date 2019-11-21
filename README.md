@@ -10,7 +10,7 @@ A CLI built in Node.js, to automate the process of creating a rest api / sockets
 
 ✓ Mysqlm support (Promise Query Streams)
 
-✓ Morgan and Voleyball loggers
+✓ Morgan logger with log folder
 
 ✓ Fully ready-to-use Typescript and Vanilla Javascript support
 
@@ -53,7 +53,6 @@ Argument | Values | Default | Description
 **-y** | *none* | *none* | Skip all prompts
 **--name** | :String | 'generated_backend' | Project Name
 **--db** | *mysql* or *mariadb* or *mssql* or *postgres* or *mysql_ns* (No Sequelize) | *mysql_ns* (No Sequelize) | Database engine to be used
-**--logger** | *morgan* or *voleyball* | *morgan* | Which logger will be used
 **--example** | *none* | *none* | Adds an example endpoint
 **-ts** | *none* | *none* | Use Typescript instead on Vanilla Javascript
 **--aliases** | *none* | *none* | Use Aliases for Modules require's

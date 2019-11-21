@@ -7,7 +7,7 @@ const gen = require('./generate.js');
 const prompts = require('./prompts.js');
 
 async function main() {
-    console.log("Create-Backend v3.8.2");
+    console.log("Create-Backend v3.8.3");
     
     console.log("What a beatiful day to write some beautiful code!\nLet's begin\n\n-github.com/ChoqueCastroLD");
 
@@ -18,7 +18,6 @@ async function main() {
         typescript,
         license,
         port,
-        logger,
         aliases
     } = prompts;
 
@@ -37,7 +36,6 @@ async function main() {
         answer.license = license.default;
         answer.port = port.default;
         answer.aliases = aliases.default;
-        answer.logger = logger.default;
     }
 
     if (args._.length > 0) inputs.name = args._.join('_') || 'generated_backend';
@@ -51,9 +49,6 @@ async function main() {
 
     if (args.db) inputs.database = (args.db + '').toLowerCase() || 'mysql';
     else if (!args.y) usedPrompts.push(database);
-
-    if (args.logger) inputs.logger = (args.logger + '').toLowerCase() || 'morgan';
-    else if (!args.y) usedPrompts.push(logger);
 
     if (args.ts) inputs.ts = true;
     else if (!args.y) usedPrompts.push(typescript);

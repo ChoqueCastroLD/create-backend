@@ -23,17 +23,6 @@ module.exports = {
         message: 'Should we include a User endpoint example?'
     },
 
-    logger: {
-        type: 'list',
-        name: 'logger',
-        default: 'morgan',
-        message: 'Which logger would you like to use?',
-        choices: ['morgan', 'voleyball'],
-        filter: function (val) {
-            return val.toLowerCase();
-        }
-    },
-
     database: {
         type: 'list',
         name: 'database',

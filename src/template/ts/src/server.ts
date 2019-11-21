@@ -10,17 +10,16 @@ inject();
 // Require Dependencies
 import env from "mandatoryenv"
 import express from "express"
-<% if(logger === 'morgan') { %>
 import morgan from "morgan"
-<% } if(logger === 'voleyball') { %>
-import voleyball from "voleyball"
-<% } %>
 import cookieParser from "cookie-parser"
 import cors from "cors"
 import helmet from "helmet"
 
-import winston from "winston"
-import expressWinston from "express-winston"
+<% if(aliases === true) { %>
+import logger from "@util/logger"
+<% } else { %>
+import logger from "./util/logger"
+<% }%>
 
 // Load .env Enviroment Variables to process.env
 env.load([
@@ -43,26 +42,10 @@ const app = express();
 app.use(express.json( { limit: '50mb' } ));
 app.use(express.urlencoded( { extended: true, limit: '10mb' } ));
 
-app.use(expressWinston.logger({
-    transports: [
-        new winston.transports.Console()
-    ],
-    format: winston.format.combine(
-        winston.format.colorize(),
-        winston.format.json()
-    ),
-    meta: true,
-    msg: " > {{res.statusCode}} {{req.method}} {{res.responseTime}}ms {{req.url}}",
-    expressFormat: true,
-    colorize: true
-}));
+// Configure custom logger middleware
+app.use(logger.dev, logger.combined);
 
-<% if(logger === 'morgan') { %>
 app.use(morgan('dev'));
-<% } %>
-<% if(logger === 'voleyball') { %>
-app.use(volleyball);
-<% } %>
 app.use(cookieParser());
 app.use(cors());
 app.use(helmet());
