@@ -12,13 +12,16 @@
 
 3. Create .env with following content
 
-````
+````<% if(database == 'mongodb') { %>
+DB_URL=
+<% } else { %>
 DB_HOST=
 DB_DATABASE=
 DB_USER=
 DB_PASSWORD=
-PORT=
-SECRET_KEY=
+<% } %>
+PORT=3000
+SECRET_KEY=AAA
 ````
 
 ## Run

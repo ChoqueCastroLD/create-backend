@@ -13,10 +13,11 @@ module.exports = {
         let getTemplate = (somePath = '') => path.resolve(__dirname, `./template/${lang}/${somePath}`);
 
 
-        let renderFile = (path, data) => {
+        let renderFile = (path, data, outputPath = '') => {
+            if(!outputPath) outputPath = path;
             ejs.renderFile(getTemplate(path), data, (err, str) => {
                 if (err) throw err;
-                fs.writeFileSync(getOutput(path), str);
+                fs.writeFileSync(getOutput(outputPath), str);
             })
         }
 
@@ -28,17 +29,15 @@ module.exports = {
         fs.mkdirSync(getOutput(`/src/controllers`), opt);
         fs.mkdirSync(getOutput(`/src/models`), opt);
         fs.mkdirSync(getOutput(`/src/routes`), opt);
+    
+        // Generate .env
+        renderFile(`env.ejs`, options, `.env`);
         
-        try {
-            // Generate .env
-            renderFile(`.env`, options);
-        } catch (error) {}
+        // Generate .gitignore
+        renderFile(`gitignore.ejs`, options, `.gitignore`);
         
         // Generate readme
         renderFile(`README.md`, options);
-        
-        // Generate .gitignore
-        renderFile(`.gitignore`, options);
 
         // Generate package.json
         renderFile(`package.json`, options);
