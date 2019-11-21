@@ -7,6 +7,8 @@ const gen = require('./generate.js');
 const prompts = require('./prompts.js');
 
 async function main() {
+    console.log("Create-Backend v3.7.1");
+    
     console.log("What a beatiful day to write some beautiful code!\nLet's begin\n\n-github.com/ChoqueCastroLD");
 
     let {
