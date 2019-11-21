@@ -58,5 +58,3 @@ typings/
 .next
 
 node_modules
-
-.env
