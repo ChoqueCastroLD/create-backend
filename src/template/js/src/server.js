@@ -19,8 +19,14 @@ const logger = require('@util/logger');
 <% } else { %>
 const logger = require('./util/logger');
 <% }%>
-
 // Load .env Enviroment Variables to process.env
+<% if(database == 'mongodb') { %>
+require('mandatoryenv').load([
+    'DB_URL',
+    'PORT',
+    'SECRET_KEY'
+]);
+<% } else { %>
 require('mandatoryenv').load([
     'DB_HOST',
     'DB_DATABASE',
@@ -29,12 +35,11 @@ require('mandatoryenv').load([
     'PORT',
     'SECRET_KEY'
 ]);
-
+<% } %>
 const { PORT } = process.env;
 
 
 // Instantiate an Express Application
-
 const app = express();
 
 

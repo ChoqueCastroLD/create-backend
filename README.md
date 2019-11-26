@@ -53,16 +53,16 @@ Argument | Values | Default | Description
 ## Examples
 
 Create project named naza_backend
-> $ npx create-backend naza_backend -y
+> $ npx create-backend naza_backend
 
 using typescript
-> $ npx create-backend naza_backend -y -ts
+> $ npx create-backend naza_backend -ts
 
 using typescript and postgressql
-> $ npx create-backend naza_backend -y -ts --db=postgres
+> $ npx create-backend naza_backend --db=postgres
 
 using javascript and mariadb
-> $ npx create-backend naza_backend -y --db=mariadb
+> $ npx create-backend naza_backend --db=mariadb
 
 
 ## TODO

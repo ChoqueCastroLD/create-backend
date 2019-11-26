@@ -22,6 +22,13 @@ import logger from "./util/logger"
 <% }%>
 
 // Load .env Enviroment Variables to process.env
+<% if(database == 'mongodb') { %>
+env.load([
+    'DB_URL',
+    'PORT',
+    'SECRET_KEY'
+]);
+<% } else { %>
 env.load([
     'DB_HOST',
     'DB_DATABASE',
@@ -30,6 +37,7 @@ env.load([
     'PORT',
     'SECRET_KEY'
 ]);
+<% } %>
 
 const { PORT } = process.env;
 
