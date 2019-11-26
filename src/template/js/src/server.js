@@ -4,7 +4,8 @@ require('module-alias/register');
 <% } %>
 
 // Patches
-require('express-custom-error').inject(); // Patch express in order to use async / await syntax
+const {inject, errorHandler} = require('express-custom-error');
+inject(); // Patch express in order to use async / await syntax
 
 // Require Dependencies
 
@@ -62,27 +63,12 @@ app.use('/', require('./routes/router.js'));
 <% } %>
 
 // Handle errors
-app.use((err, req, res, next) => {
-    if(err){ // Check if there's an error
-    <% if(rest) { %>
-        if(err.code && err.message){ // Handle custom error
-            res
-            .status(err.code)
-            .send({status: false,message: err.message});
-        } else { // Handle all other errors
-            res
-            .status(400)
-            .send({status: false,message: err});
-        }
-    <% } else { %>
-        res
-        .status(400)
-        .send({status: false,message: err});
-    <% } %>
-    } else {
-        next();
-    }
+app.use((err, req, res, next) => { // Print errors (if any)
+    if(err)
+        console.error("Error: ", err);
+    next();
 });
+app.use(errorHandler()); // Respond to errors
 
 // Handle not valid route
 app.use('*', (req, res) => {

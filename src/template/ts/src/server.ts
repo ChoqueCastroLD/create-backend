@@ -4,8 +4,8 @@ import 'module-alias/register';
 <% } %>
 
 // Patches
-import { inject } from "express-custom-error" // Patch express in order to use async / await syntax
-inject();
+import { inject, errorHandler } from "express-custom-error"
+inject(); // Patch express in order to use async / await syntax
 
 // Require Dependencies
 import env from "mandatoryenv"
@@ -61,27 +61,13 @@ import router from "./routes/router"
 app.use('/', router);
 
 // Handle errors
-app.use((err, req, res, next) => {
-    if(err){// Check if there's an error
-    <% if(rest) { %>
-        if(err.code && err.message){ // Handle custom error
-            res
-            .status(err.code)
-            .send({status: false,message: err.message});
-        } else { // Handle all other errors
-            res
-            .status(400)
-            .send({status: false,message: err});
-        }
-    <% } else { %>
-        res
-        .status(400)
-        .send({status: false,message: err});
-    <% } %>
-    } else {
-        next();
-    }
+app.use((err, req, res, next) => { // Print errors (if any)
+    if(err)
+        console.error("Error: ", err);
+    next();
 });
+app.use(errorHandler()); // Respond to errors
+
 
 // Handle not valid route
 app.use('*', (req, res) => {

@@ -75,9 +75,12 @@ using javascript and mariadb
 
 
 ## TODO
-1. Testing (Jest, Mocha)
-2. Microservices
-3. Generate backend based on .sql script
+1. [ ] Testing (Jest, Mocha)
+2. [ ] Microservices (Using cota, not so soon)
+3. [ ] Generate backend based on .sql script (model and controllers)
+4. [x] MongoDb support
+5. [ ] Joi for schema validation (Probably not)
+6. [x] Express custom error handling
 
 ---
 Screenshot:
