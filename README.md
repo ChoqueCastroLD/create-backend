@@ -28,18 +28,9 @@ A CLI built in Node.js, to automate the process of creating a rest api / sockets
 
 ✓ Bulletproof Folder Structure
 
-## Install (Optional but not Recommended)
-
-Install using NPM:
-```sh
-npm install create-backend -g
-```
-
-(You can use this module using NPX, npx comes bundled with npm)
-
 ## Usage
 
-Use directly with npx (no install needed)
+Use directly with npx (npx comes installed with npm)
 ```sh
 npx create-backend
 ```
