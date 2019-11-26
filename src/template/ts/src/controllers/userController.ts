@@ -11,28 +11,28 @@ import has from "has-keys";
 export default {
     async getUserById(req, res){
         if(!has(req.params, 'id'))
-            throw {code: s.BAD_REQUEST, message: 'You must specify the ID'};
+            throw {code: status.BAD_REQUEST, message: 'You must specify the ID'};
 
         let {id} = req.params;
 
         let data = await usersModel.getById(id);
 
-        if(data.length > 0)
-            res.json({status: true, message: 'Returning user', data});
-        else
-            res.json({status: false, message: 'User not found'});
+        if(!data)
+            throw {code: status.BAD_REQUEST, message: 'User not found'};
+            
+        res.json({status: true, message: 'Returning user', data});
     },
     async getUsers(req, res){
         let data = await usersModel.getAll();
 
-        if(data.length > 0)
-            res.json({status: true, message: 'Returning users', data});
-        else
-            res.json({status: false, message: 'Users not found'});
+        if(!data)
+            throw {code: status.BAD_REQUEST, message: 'User not found'};
+            
+        res.json({status: true, message: 'Returning users', data});
     },
     async newUser(req, res){
         if(!has(req.params, ['name', 'email']))
-            throw {code: s.BAD_REQUEST, message: 'You must specify the name and email'};
+            throw {code: status.BAD_REQUEST, message: 'You must specify the name and email'};
 
         let { name, email } = req.body;
         
@@ -42,7 +42,7 @@ export default {
     },
     async updateUser(req, res){
         if(!has(req.body, ['id', 'name', 'email']))
-            throw {code: s.BAD_REQUEST, message: 'You must specify the id, name and email'};
+            throw {code: status.BAD_REQUEST, message: 'You must specify the id, name and email'};
 
         let { id, name, email } = req.body;
         
@@ -52,7 +52,7 @@ export default {
     },
     async deleteUser(req, res){
         if(!has(req.params, 'id'))
-            throw {code: s.BAD_REQUEST, message: 'You must specify the id'};
+            throw {code: status.BAD_REQUEST, message: 'You must specify the id'};
 
         let { id } = req.params;
 
@@ -65,28 +65,25 @@ export default {
 export default {
     async getUserById(req, res){
         if(!has(req.params, 'id'))
-            throw {code: s.BAD_REQUEST, message: 'You must specify the id'};
+            throw {code: status.BAD_REQUEST, message: 'You must specify the id'};
 
         let {id} = req.params;
 
         let data = await usersModel.findOne({where: {id}});
 
-        if(data.length > 0)
-            res.json({status: true, message: 'Returning user', data});
-        else
-            res.json({status: false, message: 'User not found'});
+        if(!data)
+            throw {code: status.BAD_REQUEST, message: 'User not found'};
+
+        res.json({status: true, message: 'Returning user', data});
     },
     async getUsers(req, res){
         let data = await usersModel.findAll();
 
-        if(data.length > 0)
-            res.json({status: true, message: 'Returning users', data});
-        else
-            res.json({status: false, message: 'Users not found'});
+        res.json({status: true, message: 'Returning users', data});
     },
     async newUser(req, res){
         if(!has(req.params, ['name', 'email']))
-            throw {code: s.BAD_REQUEST, message: 'You must specify the name and email'};
+            throw {code: status.BAD_REQUEST, message: 'You must specify the name and email'};
 
         let { name, email } = req.body;
             
@@ -96,7 +93,7 @@ export default {
     },
     async updateUser(req, res){
         if(!has(req.body, ['id', 'name', 'email']))
-            throw {code: s.BAD_REQUEST, message: 'You must specify the id, name and email'};
+            throw {code: status.BAD_REQUEST, message: 'You must specify the id, name and email'};
 
         let { id, name, email } = req.body;
             
@@ -106,7 +103,7 @@ export default {
     },
     async deleteUser(req, res){
         if(!has(req.params, 'id'))
-            throw {code: s.BAD_REQUEST, message: 'You must specify the id'};
+            throw {code: status.BAD_REQUEST, message: 'You must specify the id'};
             
         let { id } = req.params;
 
