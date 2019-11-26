@@ -9,7 +9,7 @@ import userRoutes from "@routes/userRoutes";
 <% } else { %>
 import userRoutes from "./userRoutes";
 <% } %>
-router.use('/users', userRoutes);
+router.use(userRoutes);
 <% } else { %>
 // You can require and use your routes here ;)
 <% } %>

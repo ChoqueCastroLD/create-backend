@@ -8,15 +8,15 @@ import usersController from "@controllers/userController";
 import usersController from "../controllers/userController";
 <% } %>
 
-router.get('/:id', usersController.getUserById);
+router.get('/api/users/:id', usersController.getUserById);
 
-router.get('/', usersController.getUsers);
+router.get('/api/users', usersController.getUsers);
 
-router.post('/', usersController.newUser);
+router.post('/api/users', usersController.newUser);
 
-router.delete('/', usersController.deleteUser);
+router.delete('/api/users/:id', usersController.deleteUser);
 
-router.put('/', usersController.updateUser);
+router.put('/api/users', usersController.updateUser);
 
 
 export default router;

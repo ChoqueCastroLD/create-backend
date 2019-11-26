@@ -41,7 +41,7 @@ module.exports = {
         res.json({status: true, message: 'User added'});
     },
     async updateUser(req, res){
-        if(!has(req.params, ['id', 'name', 'email']))
+        if(!has(req.body, ['id', 'name', 'email']))
             throw {code: s.BAD_REQUEST, message: 'You must specify the id, name and email'};
 
         let { id, name, email } = req.body;
@@ -95,7 +95,7 @@ module.exports = {
         res.json({status: true, message: 'User Added'});
     },
     async updateUser(req, res){
-        if(!has(req.params, ['id', 'name', 'email']))
+        if(!has(req.body, ['id', 'name', 'email']))
             throw {code: s.BAD_REQUEST, message: 'You must specify the id, name and email'};
 
         let { id, name, email } = req.body;
