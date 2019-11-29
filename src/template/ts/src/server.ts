@@ -26,7 +26,7 @@ import logger from "./util/logger"
 env.load([
     'DB_URL',
     'PORT',
-    'SECRET_KEY'
+    'SECRET'
 ]);
 <% } else { %>
 env.load([
@@ -35,7 +35,7 @@ env.load([
     'DB_USER',
     'DB_PASSWORD',
     'PORT',
-    'SECRET_KEY'
+    'SECRET'
 ]);
 <% } %>
 

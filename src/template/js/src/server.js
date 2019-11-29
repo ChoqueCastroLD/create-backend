@@ -24,7 +24,7 @@ const logger = require('./util/logger');
 require('mandatoryenv').load([
     'DB_URL',
     'PORT',
-    'SECRET_KEY'
+    'SECRET'
 ]);
 <% } else { %>
 require('mandatoryenv').load([
@@ -33,7 +33,7 @@ require('mandatoryenv').load([
     'DB_USER',
     'DB_PASSWORD',
     'PORT',
-    'SECRET_KEY'
+    'SECRET'
 ]);
 <% } %>
 const { PORT } = process.env;

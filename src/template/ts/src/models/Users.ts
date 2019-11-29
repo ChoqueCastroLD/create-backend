@@ -58,13 +58,13 @@ const user = {
     },
     /** Adds a new user to database*/
     async create(name, email){
-        let result = await db.query('INSERT INTO users(id, name, email) VALUES(0, ?, ?)', [name, email]);
-        return result;
+        const { insertId } = await db.query('INSERT INTO users(id, name, email) VALUES(0, ?, ?)', [name, email]);
+        return (await db.query('SELECT id, name, email FROM users WHERE id = ?', [insertId]))[0];
     },
     /** Update an existing user */
     async update(id, name, email){
-        let result = await db.query('UPDATE users SET name = ?, email = ? WHERE id = ?', [name, email, id]);
-        return result;
+        await db.query('UPDATE users SET name = ?, email = ? WHERE id = ?', [name, email, id]);
+        return (await db.query('SELECT id, name, email FROM users WHERE id = ?', [id]))[0];
     },
     /** Deletes an existing user */
     async delete(id){
@@ -101,7 +101,7 @@ const users = {
         delete good._id;
         delete good.id;
         
-        await dbo.collection('users').insertOne(good);
+        return (await dbo.collection('users').insertOne(good)).ops[0];
     },
 
     async update(good) {
@@ -112,7 +112,7 @@ const users = {
         delete good._id;
         delete good.id;
 
-        await dbo.collection('users').updateOne({_id:  new ObjectId(_id)},{$set: good});
+        return await dbo.collection('users').findOneAndUpdate({_id:  new ObjectId(_id)},{$set: good},{ returnNewDocument: true });
     },
 
     async delete(good) {

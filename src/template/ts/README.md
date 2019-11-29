@@ -21,7 +21,7 @@ DB_USER=
 DB_PASSWORD=
 <% } %>
 PORT=3000
-SECRET_KEY=AAA
+SECRET=AAA
 ````
 
 ## Run
