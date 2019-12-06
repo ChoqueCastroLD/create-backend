@@ -17,7 +17,6 @@ async function main() {
         database,
         typescript,
         license,
-        port,
         aliases
     } = prompts;
 
@@ -34,7 +33,6 @@ async function main() {
         answer.database = database.default;
         answer.ts = typescript.default;
         answer.license = license.default;
-        answer.port = port.default;
         answer.aliases = aliases.default;
     }
 
@@ -56,9 +54,6 @@ async function main() {
     if (args.license) inputs.license = args.license || 'UNLICENSED';
     else if (!args.y) usedPrompts.push(license);
 
-    if (args.port) inputs.port = args.license || 3000;
-    else if (!args.y) usedPrompts.push(port);
-
     if (usedPrompts.length > 0)
         answer = await inquirer.prompt(usedPrompts);
 
@@ -66,6 +61,8 @@ async function main() {
         ...answer,
         ...inputs
     };
+    
+    options.port = 3000;
     
     let projectPath = await gen.generate(options);
 
