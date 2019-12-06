@@ -62,8 +62,8 @@ module.exports = {
 
         if (options.rest) {
             renderFile(`src/models/users.${lang}`, options);
-            renderFile(`src/controllers/userController.${lang}`, options);
-            renderFile(`src/routes/userRoutes.${lang}`, options);
+            renderFile(`src/controllers/user.${lang}`, options);
+            renderFile(`src/routes/user.${lang}`, options);
         }
 
         return getOutput('');

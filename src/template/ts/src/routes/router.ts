@@ -5,11 +5,11 @@ const router = express.Router();
 <% if(rest) { %>
 // Users routes
 <% if(aliases === true) { %>
-import userRoutes from "@routes/userRoutes";
+import user from "@routes/user";
 <% } else { %>
-import userRoutes from "./userRoutes";
+import user from "./user";
 <% } %>
-router.use(userRoutes);
+router.use(user);
 <% } else { %>
 // You can require and use your routes here ;)
 <% } %>

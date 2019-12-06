@@ -3,9 +3,9 @@ import express from "express";
 const router = express.Router();
 
 <% if(aliases === true) { %>
-import usersController from "@controllers/userController";
+import usersController from "@controllers/user";
 <% } else { %>
-import usersController from "../controllers/userController";
+import usersController from "../controllers/user";
 <% } %>
 
 router.get('/api/users/:id', usersController.getUserById);
