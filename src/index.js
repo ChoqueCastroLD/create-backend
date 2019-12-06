@@ -74,12 +74,14 @@ async function main() {
     What's next?
     1. Go to your project folder
     cd ${projectPath}
-
-    2. Install and Update node_modules
-    npm run setup
     
-    3. Try it!
-    npm start
+    2. Setup migrations (Optional for MySql No Sequalize)
+    npx install-migrate
+
+    3. Install and Update node_modules
+    npm run setup
+
+    Now you can run the project with npm start or npm run dev
     `);
 }
 
