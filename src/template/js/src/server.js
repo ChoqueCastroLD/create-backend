@@ -68,12 +68,7 @@ app.use('/', require('./routes/router.js'));
 <% } %>
 
 // Handle errors
-app.use((err, req, res, next) => { // Print errors (if any)
-    if(err)
-        console.error("Error: ", err);
-    next();
-});
-app.use(errorHandler()); // Respond to errors
+app.use(errorHandler());
 
 // Handle not valid route
 app.use('*', (req, res) => {
